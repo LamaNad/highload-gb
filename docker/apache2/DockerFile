@@ -26,22 +26,18 @@ RUN apt-get update && \
   cron systemd supervisor
 RUN apt-get update -y
 
-RUN apt-get install php-dev libmcrypt-dev  npm -y
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
-  && apt-get install -y nodejs
-
+RUN apt-get install php7.4-dev -y
 RUN pecl install xdebug
+
 RUN rm -R /etc/apache2/sites-enabled/* /etc/apache2/sites-available/* /var/www/*
 RUN mkdir "/var/log/xdebug"
 RUN chown -R www-data:www-data /var/log/xdebug
 
 RUN pecl channel-update pecl.php.net
-RUN pecl install mcrypt
 
-EXPOSE 80 443
 COPY ./docker/apache2/conf/apache2.conf /etc/apache2/apache2.conf
-COPY ./docker/apache2/conf/php.ini /etc/php/7.2/apache2/php.ini
-COPY ./docker/apache2/conf/php.ini /etc/php/7.2/cli/php.ini
+COPY ./docker/apache2/conf/php.ini /etc/php/7.4/apache2/php.ini
+COPY ./docker/apache2/conf/php.ini /etc/php/7.4/cli/php.ini
 
 RUN a2enmod rewrite
 RUN a2enmod ssl
