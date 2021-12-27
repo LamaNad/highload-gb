@@ -10,10 +10,10 @@ class ExampleCacheController extends Controller
     public function index()
     {
         Cache::add('key', 'value');
-        if (Cache::has('key1')) {
-            var_dump(';eqweqwe');
+        if (Cache::has('key')) {
+            var_dump('key');
         } else {
-            die('tiiii');
+            die('Cache is empty');
         }
     }
 }

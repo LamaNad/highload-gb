@@ -43,3 +43,6 @@ services:
             - 6379:6379
 #        volumes:
 #            - ./docker/redis/data:/var/lib/redis
+
+    memcached:
+        image: 'bitnami/memcached:latest'
